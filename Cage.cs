@@ -20,6 +20,25 @@ namespace Zoo
             ((ICage)this).setThreshold();
             foodSupply = 0;
         }
+        public int getAnimalsAmount()
+        {
+            return animalsInCommon.Count;
+        }
+
+        public Animal getCertainCage(int id)
+        {
+            return animalsInCommon[id];
+        }
+
+        public Animal getCertainAnimal(int index)
+        {
+            return animalsInCommon[index];
+        }
+
+        public List<Animal> getAnimalsInCommon()
+        {
+            return animalsInCommon;
+        }
         void ICage.changeFood(int amount)
         {
             if (foodSupply - amount < 0) foodSupply = 0;
