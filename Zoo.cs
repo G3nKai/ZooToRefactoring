@@ -16,11 +16,6 @@ namespace Zoo
         {
             return cages;
         }
-        public List<Employees> getEmployees()
-        {
-            return employees;
-        }
-
         public Employees getCertainEmployee(int id)
         {
             return employees[id];
