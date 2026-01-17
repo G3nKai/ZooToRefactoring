@@ -37,7 +37,16 @@ namespace Zoo
                     foreach (var visitors in zoo.visitors)
                     {
                         Random random = new Random();
-                        visitors.feedAnimal(zoo.cages[i], zoo.cages[i].animalsInCommon[random.Next(0, zoo.cages[i].animalsInCommon.Count)]);
+
+                        Cage cage = zoo.cages[i];
+
+                        int randomizedAnimal = random.Next(0, cage.getAnimalsAmount());
+
+                        List<Animal> animalsInCommon = cage.getAnimalsInCommon();
+
+                        Animal animal = animalsInCommon[randomizedAnimal];
+
+                        visitors.feedAnimal(cage, animal);
                 }
                 }
 
@@ -234,15 +243,17 @@ namespace Zoo
         {
             int number = int.Parse(Console.ReadLine());
 
+            Employees employee = zoo.getCertainEmployee(index);
+
             switch (number)
             {
                 case 1:
                     Console.Write("Введите новое имя: ");
-                    zoo.employees[index].changeName();
+                    employee.changeName();
                     break;
                 case 2:
                     Console.Write("Введите изменённый пол (М | Ж): ");
-                    zoo.employees[index].changeGender();
+                    employee.changeGender();
                     break;
                 case 3:
                     Console.Write("Введите новую должность:\n" +
@@ -253,21 +264,21 @@ namespace Zoo
                     switch (occupation)
                     {
                         case 1:
-                            if (zoo.employees[index].occupation == 1)
+                            if (employee.occupation == 1)
                             {
                                 Console.WriteLine("Он и так уже уборщик...\n" +
                                     "Вы перебрасываетесь в меню редактирования.\n");
                                 return;
                             }
 
-                            zoo.employees[index].changeOccupation(1);
+                            employee.changeOccupation(1);
                             break;
                         case 2:
-                            if (zoo.employees[index].occupation == 2) 
+                            if (employee.occupation == 2) 
                                 Console.WriteLine("В таком случае назначьте новый список животных для сотрудника:\n");
 
-                            zoo.employees[index].changeOccupation(2);
-                            zoo.employees[index].getAnimalToWork(zoo.cages);
+                            employee.changeOccupation(2);
+                            employee.getAnimalToWork(zoo.cages);
                             break;
                     }
 
@@ -275,7 +286,7 @@ namespace Zoo
             }
 
             Console.WriteLine("Изменения применены. Статус измененного сотрудника:\n");
-            zoo.employees[index].getInfo();
+            employee.getInfo();
         }
         static void edit()
         {
@@ -341,7 +352,9 @@ namespace Zoo
                         break;
                     case 3:
                         bool _isEmply = true;
-                        foreach (var cage in zoo.cages)
+                        List<Cage> cages  = zoo.getCages();
+
+                        foreach (var cage in cages)
                         {
                             if (cage.animalsInCommon.Count > 0)
                             {
@@ -358,17 +371,23 @@ namespace Zoo
 
                         Console.WriteLine("Список вольеров. Выберите номер:");
 
-                        for (int i = 0; i < zoo.cages.Count; i++)
+                        for (int i = 0; i < cages.Count; i++)
                             Console.WriteLine($"{i + 1} вольер.");
 
                         int numberOfCage = int.Parse(Console.ReadLine());
 
                         Console.WriteLine("Вот список животных. Выберите номер того, кого вы хотите редактировать.\n");
 
-                        for (int i = 0; i < zoo.cages[numberOfCage - 1].animalsInCommon.Count; i++)
+
+                        int amountOfCages = cages[numberOfCage - 1].getAnimalsAmount();
+
+                        for (int i = 0; i < amountOfCages; i++)
                         {
                             Console.Write($"{i + 1}. ");
-                            zoo.cages[numberOfCage - 1].animalsInCommon[i].getInfo();
+
+                            Animal animal = cages[numberOfCage - 1].animalsInCommon[i];
+
+                            animal.getInfo();
                         }
 
                         int chosenAnimal = int.Parse(Console.ReadLine()) - 1;
@@ -392,6 +411,8 @@ namespace Zoo
                 "3. Животное.\n");
 
                 int num = int.Parse(Console.ReadLine());
+
+                List<Cage> cages = zoo.getCages();
 
                 switch (num)
                 {
@@ -436,7 +457,7 @@ namespace Zoo
                         break;
                     case 3:
                         bool _isEmply = true;
-                        foreach (var cage in zoo.cages)
+                        foreach (var cage in cages)
                         {
                             if (cage.animalsInCommon.Count > 0)
                             {
@@ -453,22 +474,28 @@ namespace Zoo
 
                         Console.WriteLine("Список вольеров. Выберите номер:");
 
-                        for (int i = 0; i < zoo.cages.Count; i++)
+                        for (int i = 0; i < cages.Count; i++)
                             Console.WriteLine($"{i + 1} вольер.");
 
                         int numberOfCage = int.Parse(Console.ReadLine());
 
                         Console.WriteLine("Вот список животных. Выберите номер того, кого вы хотите удалить.\n");
 
-                        for (int i = 0; i < zoo.cages[numberOfCage - 1].animalsInCommon.Count; i++)
+                        for (int i = 0; i < cages[numberOfCage - 1].animalsInCommon.Count; i++)
                         {
                             Console.Write($"{i + 1}. ");
-                            zoo.cages[numberOfCage - 1].animalsInCommon[i].getInfo();
+                            cages[numberOfCage - 1].animalsInCommon[i].getInfo();
                         }
 
                         int species = int.Parse(Console.ReadLine()) - 1;
 
-                        zoo.caseWhenDirectorDeletesAnimal(zoo.cages[numberOfCage - 1].animalsInCommon[species]);
+                        int amountOfCages = cages[numberOfCage - 1].getAnimalsAmount();
+
+                        Cage chosenCage = cages[numberOfCage - 1];
+
+                        Animal animal = chosenCage.getCertainAnimal(species);
+
+                        zoo.caseWhenDirectorDeletesAnimal(animal);
                         Console.WriteLine($"Животное под номером {species} было успешно удалено.\n");
                         break;
                 }

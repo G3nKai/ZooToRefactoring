@@ -25,6 +25,26 @@ namespace Zoo
             if (foodSupply - amount < 0) foodSupply = 0;
             else foodSupply -= amount;
         }
+        public int getAnimalsAmount()
+        {
+            return animalsInCommon.Count;
+        }
+
+        public Animal getCertainCage(int id)
+        {
+            return animalsInCommon[id];
+        }
+
+        public Animal getCertainAnimal(int index)
+        {
+            return animalsInCommon[index];
+        }
+
+        public List<Animal> getAnimalsInCommon()
+        {
+            return animalsInCommon;
+        }
+
         Type ICage.checkSpecies()
         {
             if (threshold == 5)
