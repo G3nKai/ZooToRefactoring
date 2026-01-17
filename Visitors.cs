@@ -38,12 +38,5 @@ namespace Zoo
             cracker = 0;
             return cracker;
         }
-        public void seeAnimals(List<Cage> cages)
-        {
-            for (int i = 0; i < cages.Count; i++)
-            {
-                ((ICageOpened)cages[i]).getInfo();
-            }
-        }
     }
 }

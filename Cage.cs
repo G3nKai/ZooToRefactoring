@@ -25,11 +25,6 @@ namespace Zoo
             return animalsInCommon.Count;
         }
 
-        public Animal getCertainCage(int id)
-        {
-            return animalsInCommon[id];
-        }
-
         public Animal getCertainAnimal(int index)
         {
             return animalsInCommon[index];

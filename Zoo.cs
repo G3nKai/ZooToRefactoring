@@ -212,10 +212,6 @@ namespace Zoo
         {
             visitors.RemoveAt(index);
         }
-        public void removeAnimal(int index)
-        {
-            ((ICage)cages).removeAnimal(index);
-        }
         public void animalVoice(int index, int numberOfCage)
         {
             /*animals[index].voice();*/
