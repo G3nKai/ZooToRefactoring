@@ -66,7 +66,7 @@ namespace Zoo
 
             
         }
-        public void getFeeded()
+        public void getFeeded()//
         {
             if (occupation == 2)
                 foreach (var cage in responsibility)

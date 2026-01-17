@@ -9,6 +9,8 @@ namespace Zoo
 {
     class Visitors : People
     {
+        private int oneDollar = 1;
+        private int oneFood = 6;
         Random rnd = new Random();
         private int money;
         public Visitors(string name, char gender) : base(name, gender) 
@@ -17,26 +19,17 @@ namespace Zoo
             this.gender = gender;
             int money = rnd.Next(150, 671);
         }
-        public void feedAnimal(Cage cage, Animal animal) 
+        public int buyFood(Cage cage, Animal animal) //
         {
             if (cage.animalsOpened.Contains(animal) && animal.isHungry) 
             {
-                int food = buyFood();
-                animal.gettingFeeded(food);
+                if (money - oneDollar > 0)
+                {
+                    money--;
+                    return oneFood;
+                }
             }
-        }
-        public int buyFood()
-        {
-            int cracker;
-            //1 единица валюты - 6 сытости
-            if (money - 1 > 0)
-            {
-                money--;
-                cracker = 6;
-                return cracker;
-            }
-            cracker = 0;
-            return cracker;
+            return 0;
         }
     }
 }

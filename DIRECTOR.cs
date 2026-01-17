@@ -30,6 +30,7 @@ namespace Zoo
                 foreach (var employee in zoo.employees)
                 {
                     employee.getFeeded();
+
                 }
 
                 for (int i = 0; i < zoo.cages.Count; i++)
@@ -46,7 +47,8 @@ namespace Zoo
 
                         Animal animal = animalsInCommon[randomizedAnimal];
 
-                        visitors.feedAnimal(cage, animal);
+                        int food = visitors.buyFood(cage, animal);
+                        animal.gettingFeeded(food);
                     }
                 }
 
