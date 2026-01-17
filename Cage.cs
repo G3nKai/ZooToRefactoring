@@ -39,15 +39,14 @@ namespace Zoo
             if (foodSupply - amount < 0) foodSupply = 0;
             else foodSupply -= amount;
         }
-        Type ICage.checkSpecies()
+        EnumAnimalName ICage.checkSpecies()
         {
             if (threshold == 5)
-                return typeof(Wolf);
+                return EnumAnimalName.Wolf;
             else if (threshold == 8)
-                return typeof(Monkey);
-            else if (threshold == 13)
-                return typeof(Parrot);
-            return typeof(Animal);
+                return EnumAnimalName.Monkey;
+            //else if (threshold == 13)
+            return EnumAnimalName.Parrot;
         }
         bool ICage.checkThreshold()
         {
@@ -127,11 +126,11 @@ namespace Zoo
         {
             if (animalsInCommon.Count == 0)
                 threshold = 20;
-            else if (animalsInCommon[0] is Wolf) 
+            else if (animalsInCommon[0].animalName == EnumAnimalName.Wolf) 
                 threshold = 5;
-            else if (animalsInCommon[0] is Monkey)
+            else if (animalsInCommon[0].animalName == EnumAnimalName.Monkey)
                 threshold = 8;
-            else if (animalsInCommon[0] is Parrot)
+            else if (animalsInCommon[0].animalName == EnumAnimalName.Parrot)
                 threshold = 13;
         }
         void ICage.addAnimal(Animal animal)

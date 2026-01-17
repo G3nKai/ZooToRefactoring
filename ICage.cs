@@ -11,7 +11,7 @@ namespace Zoo
         int countAnimals();//вызовет две функции
         void addAnimal(Animal animal);
         void removeAnimal(int index);
-        Type checkSpecies();
+        EnumAnimalName checkSpecies();
         void checkFood();
         bool checkThreshold();//количество допустимых животных в зависимости от вида
         void setThreshold();

@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Zoo
 {
-    class Parrot : Animal
+    public enum EnumAnimalName
     {
-        public Parrot()
-        {
-            hungerThreshold = 80;
-        }
+        Parrot,
+        Wolf,
+        Monkey
     }
 }

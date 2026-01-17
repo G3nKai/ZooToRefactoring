@@ -12,6 +12,7 @@ namespace Zoo
         public int state { protected get; set; } = based;
         public bool isHungry { get; set; } = false;
         public int hungerThreshold { get; protected set; }
+        public EnumAnimalName animalName { get; set; }
         public void getInfo()
         {
             _isHungry();
@@ -53,13 +54,14 @@ namespace Zoo
         }
         public void voice() 
         {
-            if (this is Monkey) Console.WriteLine("Обезьяна говорит: *бу-га-га*!\n");
-            else if (this is Parrot) Console.WriteLine("Попугай говорит: Плохой директор! Плохой!!!\n");
+            if (animalName ==  EnumAnimalName.Monkey) Console.WriteLine("Обезьяна говорит: *бу-га-га*!\n");
+            else if (animalName == EnumAnimalName.Parrot) Console.WriteLine("Попугай говорит: Плохой директор! Плохой!!!\n");
             else Console.WriteLine("Волк говорит: *Ву-у-у-у*!\n");
         }
         public void changeState(int value)
         {
             state = value;
         }
+
     }
 }
